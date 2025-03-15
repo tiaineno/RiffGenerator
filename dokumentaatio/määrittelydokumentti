@@ -1,7 +1,10 @@
-Käytän projektissani Pythonia. Hallitsen sen myös Javascriptiä kohtuullisen hyvin ja C++ alkeellisella tasolla, joista ainakin Javascriptiä pystyn arvioimaan.
+Käytän projektissani Pythonia. Pystyn myös arvioimaan Javascriptillä kirjoitettua koodia. C++ osaan alkeellisella tasolla.
 
 Projektin ydin on koneoppiminen. Tavoitteena on saada luotua Markovin ketjua (ja trie-tietorakennetta) hyödyntävä algoritmi, joka generoi kitarariffejä.
+Aluksi tavoitteena on tehdä yksiäänisiä melodiakulkuja, jonka jälkeen yritän saada mukaan rytmiikkaa ja useita samanaikaisia ääniä.
 Ohjelma saa syötteenä midi-tiedostoja joiden pohjalta se luo uusia. Vielä on hieman epäselvää miten syötteen anto tapahtuu.
+
 Markovin ketjun aikavaativuus on lineraalinen (O(N)), sillä syöte luetaan kerran läpi ja generointi tapahtuu satunnaisesti siirtymäfunktion avulla, joten suurillakin syötteillä sen pitäisi toimia suhteellisen nopeasti. 
+Muistin kulutus tulee riippumaan useasta muuttujasta. Esimerkiksi Markovin ketjun aste nostaa tarvittavaa tilaa exponentaalisesti.
 
 Opiskelen tietojenkäsittelytieteen kandidaatin opiskeluohjelmassa.
