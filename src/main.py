@@ -1,7 +1,11 @@
 """
-Using Tuiki Tuiki Tähtönen and Metallica - Master of Puppets to test the algorithm
-before writing valid tests
+Using Tuiki Tuiki Tähtönen and Metallica - Master of Puppets for manual testing
 """
+
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from markov import Generator
 

@@ -18,7 +18,6 @@ class Trie:
     def __init__(self):
         self.root = Node()
 
-
     def insert(self, sequence):
         """
         inserts a single sequence to the tree

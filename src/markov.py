@@ -1,5 +1,10 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 import random
-from trie import Trie
+from src.trie import Trie
 
 class Generator:
     """
@@ -14,7 +19,7 @@ class Generator:
         """
         Takes a list of midi notes as a parameter and inserts every sub sequence into the trie
         """
-        for i in range(len(sequence)-self.order):
+        for i in range(len(sequence)):
             self.trie.insert(sequence[i:i+1+self.order])
 
     def get_probabilities(self, probabilities):
@@ -38,7 +43,6 @@ class Generator:
             else:
                 probabilities = self.trie.find(sequence[-self.order:])
             probabilities = self.get_probabilities(probabilities)
-
             next_note = random.choices(list(probabilities.keys()),
                                        weights=probabilities.values())[0]
             sequence.append(next_note)
