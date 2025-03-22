@@ -12,6 +12,7 @@ pytest = "^8.3.5"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.3.5"
+coverage = "^7.7.1"
 
 [build-system]
 requires = ["poetry-core"]

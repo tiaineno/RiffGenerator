@@ -17,6 +17,8 @@ def test_probs():
     gen = Generator(3)
     probs = {64: 1, 65:2}
     assert gen.get_probabilities(probs) == {64:1/3, 65:2/3}
+    probs_empty = {}
+    assert gen.get_probabilities(probs_empty) == {}
 
 def test_order1():
     gen = Generator(1)

@@ -1,3 +1,5 @@
 .pytest_cache/
 poetry.lock
-src/__pycache__/
+__pycache__/
+.coverage
+htmlcov/
