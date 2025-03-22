@@ -1,0 +1,30 @@
+Mitä olen tehnyt tällä viikolla?
+
+Tällä viikolla sain tehtyä projektiin tietorakenteen sekä itse algoritmin pääosin valmiiksi.
+Käytin jonkun verran aikaa tutustuakseni markovin ketjun ja trien soveltamiseen tähän käyttötarkoitukseen, mutta
+suurin osa ajasta meni bugien ja ongelmien selvittämiseen itse koodauksen lisäksi.
+Tein myös testit sekä tietorakenteelle ja algoritmille.
+
+Miten ohjelma on edistynyt?
+
+Ohjelma toimii lyhyiden, manuaalisesti kirjoitettujen syötteiden kanssa lähes niin hyvin kuin mahdollista.
+Joudun todennäköisesti hieman muuttamaan jotain toimintaperiaatteita, mutta ainakin tässä vaiheessa projektin ydin on valmis.
+
+Mitä opin tällä viikolla / tänään?
+
+Opin ymmärtämään syvemmin markovin ketjua ja sen käyttäytymistä eri syötteillä.
+Opin myös siihen liittyvistä ongelmista sekä tulevaisuudessa huomioon otettavista asioista.
+
+Mikä jäi epäselväksi tai tuottanut vaikeuksia?
+
+Ongelmia tuotti etenkin syötteen viimeisten nuottien käsittely.
+Jos ne jätti kokonaan lisäämättä tietorakenteeseen, ilmeni kriittisiä ongelmia.
+Päädyin lisäämään viimeiset nuotit pienemmillä asteilla.
+Tämä voi tehdä generoinnista hieman satunnaisempaa, mutta ainakaan vielä se ei ole tuottanut ongelmia.
+Testit tuntuivat hieman riittämättömiltä, sillä ohjelma vaatii manuaalista arviointia sävellysten tasosta.
+
+Mitä teen seuraavaksi?
+
+Ensi viikolla teen mahdolliseksi midi-tiedostojen syötön ja muutan ohjelmaa niin, että se myös palauttaa midi-tiedostoja.
+Sen jälkeen alan testaamaan ohjelmaa suuremmalla määrällä syötteitä.
+Myös rytmin ottaminen huomioon olisi tavoitteena saada tehtyä, mutta tämän toteutus on vielä hieman epäselvää.
