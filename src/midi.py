@@ -9,7 +9,7 @@ def midi_to_list(path):
     notes = []
 
     for part in midi_data.parts:
-        for element in part.flat.notes:
+        for element in part.flatten().notes:
             if isinstance(element, note.Note):
                 notes.append(element.pitch.midi)
     return notes
