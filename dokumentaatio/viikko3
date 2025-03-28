@@ -1,0 +1,23 @@
+Mitä olen tehnyt tällä viikolla?
+
+Olen ohjelmoinut sovellukselle käyttöliittymän sekä midi-tiedostojen lukemisen/kirjoittamisen. Aikaa meni myös eri syötteiden testailuun. Aikaa käytin noin 10 tuntia.
+
+Miten ohjelma on edistynyt?
+
+Ohjelma toimii käyttöliittymän kautta hyvin. En saanut vielä korjattua syötteiden loppuun liittyvää ongelmaa.
+
+Mitä opin tällä viikolla / tänään?
+
+En juuri mitään uutta, ymmärsin käyttöliittymää ohjelmoidessa kuitenkin esimerkiksi koodin rakenteen ja selkeyden tärkeyden, johon en yleensä kiinnitä suurta huomiota.
+
+Mikä jäi epäselväksi tai tuottanut vaikeuksia?
+
+Tämän viikon osalta ei mikään. En ruvennut enää kirjoittamaan testejä käyttöliittymälle, mutta en usko, että testaus user inputien kanssa tuottaa ongelmia.
+Haluaisin ottaa vielä rytmin huomioon riffejä generoidessa. En ole kuitenkaan aivan varma mikä olisi paras tapa toteuttaa se.
+Yksi vaihtoehto olisi moninkertaistaa tietorakenteen koko ja luoda jokaiselle sävelkorkeus-aika-arvo kombinaatiolle oma slotti.
+Tällöin tosin syötteitäkin tarvitsisi enemmän, sillä generoinnista tulisi luultavasti vähemmän (jos ollenkaan) satunnaista.
+Toinen mieleen tullut vaihtoehto olisi luoda toinen tietorakenne rytmeille, jolloin tosin jokaisen nuotin aika-arvon sekä sävelkorkeuden generointi tapahtuisi "erikseen".
+
+Mitä teen seuraavaksi?
+
+Ensi viikolla pyrin ottamaan rytmin huomioon generoinnissa ja keskityn dokumentointiin sekä uusien testaustekniikoiden ohjelmoimiseen.
