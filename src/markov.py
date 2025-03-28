@@ -22,6 +22,12 @@ class Generator:
         for i in range(len(sequence)):
             self.trie.insert(sequence[i:i+1+self.order])
 
+    def isempty(self):
+        """
+        returns if the data structure is empty or not
+        """
+        return self.trie.root.children == [None] * 128
+
     def get_probabilities(self, probabilities):
         """
         utility to return probablities from a dictionary of notes

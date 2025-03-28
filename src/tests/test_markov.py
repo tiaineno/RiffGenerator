@@ -20,6 +20,14 @@ def test_probs():
     probs_empty = {}
     assert gen.get_probabilities(probs_empty) == {}
 
+def test_isempty():
+    gen = Generator(3)
+    assert gen.isempty() is True
+
+    sequence = [60, 62, 64, 65, 67, 69, 71, 72]
+    gen.insert(sequence)
+    assert gen.isempty() is False
+
 def test_order1():
     gen = Generator(1)
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
