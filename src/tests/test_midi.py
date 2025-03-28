@@ -1,6 +1,7 @@
 import sys
 import os
 import pytest
+import shutil
 from music21 import note, stream
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
@@ -20,7 +21,7 @@ def create_file():
 
 def test_list_to_midi(create_file, cleanup_files):
     test_input_path, test_notes = create_file
-    test_output_path = './data/output/test_output.mid'
+    test_output_path = './data/output/testfolder/test_output.mid'
 
     list_to_midi(test_notes, test_output_path)
 
@@ -39,9 +40,9 @@ def test_midi_to_list(create_file, cleanup_files):
 def cleanup_files():
     yield
     test_input_path = './data/input/test.mid'
-    test_output_path = './data/output/test_output.mid'
+    test_folder_path = './data/output/testfolder'
 
     if os.path.exists(test_input_path):
         os.remove(test_input_path)
-    if os.path.exists(test_output_path):
-        os.remove(test_output_path)
+    if os.path.exists(test_folder_path):
+        shutil.rmtree(test_folder_path)
