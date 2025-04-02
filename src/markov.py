@@ -1,10 +1,16 @@
 import sys
 import os
+import random
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-import random
-from src.trie import Trie
+"""
+making sure the right path is found
+"""
+try:
+    from trie import Trie
+except ModuleNotFoundError:
+    from src.trie import Trie
 
 class Generator:
     """
@@ -18,9 +24,14 @@ class Generator:
     def insert(self, sequence):
         """
         Takes a list of midi notes as a parameter and inserts every sub sequence into the trie
+        In the end the of the input the missing notes of the desired order are taken from the beginning
         """
         for i in range(len(sequence)):
-            self.trie.insert(sequence[i:i+1+self.order])
+            if i < len(sequence)-self.order:
+                seq = sequence[i:i+1+self.order]
+            else:
+                seq = sequence[i:] + sequence[:i+1+self.order-len(sequence)]
+            self.trie.insert(seq)
 
     def isempty(self):
         """

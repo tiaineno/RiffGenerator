@@ -1,10 +1,10 @@
 import sys
 import os
-import random
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 from src.markov import Generator
+from src.midi import midi_to_list
 
 def test_insert():
     gen = Generator(3)
@@ -28,7 +28,7 @@ def test_isempty():
     gen.insert(sequence)
     assert gen.isempty() is False
 
-def test_order1():
+def test_right_key():
     gen = Generator(1)
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
@@ -38,16 +38,38 @@ def test_order1():
     assert len(result) == 5
     assert all(note in sequence for note in result)
 
-def test_order3():
-    """
-    Using a seed to test a special occasion which used to cause errors
-    """
-    gen = Generator(3)
+def test_order2():
+    gen = Generator(2)
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
 
-    random.seed(1)
     result = gen.generate(20, 40)
+    for i in range(len(result)-3):
+        found = False
+        """
+        these loops will check if every sequence is part of input
+        """
+        for j in range(len(sequence)):
+            if (sequence[j:j+3] == result[i:i+3] or
+                sequence[j:] + sequence[:j+3-len(sequence)] == result[i:i+3]):
+                    found = True
+        assert found is True
 
-    assert result == [40, 41, 43, 40, 41, 40, 41, 43, 40, 41,
-                      40, 42, 43, 43, 43, 40, 40, 41, 42, 43]
+def test_multiple_inserts():
+    gen = Generator(2)
+    sequence = midi_to_list("./data/input/metallica/mop.mid")
+    sequence2 = midi_to_list("./data/input/metallica/sandman.mid")
+
+    gen.insert(sequence)
+    gen.insert(sequence2)
+
+    result = gen.generate(20, 40)
+    for i in range(len(result)-3):
+        found = False
+        for j in range(len(sequence)):
+            if (sequence[j:j+3] == result[i:i+3] or
+                sequence[j:] + sequence[:j+3-len(sequence)] == result[i:i+3] or
+                sequence2[j:j+3] == result[i:i+3] or
+                sequence2[j:] + sequence2[:j+3-len(sequence2)] == result[i:i+3]):
+                    found = True
+        assert found is True
