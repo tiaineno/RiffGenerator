@@ -1,5 +1,5 @@
 import os
-from music21 import converter, note, stream
+from music21 import converter, note, chord, stream
 
 def midi_to_list(path):
     """
@@ -12,6 +12,9 @@ def midi_to_list(path):
         for element in part.flatten().notes:
             if isinstance(element, note.Note):
                 notes.append(element.pitch.midi)
+            #using root notes
+            if isinstance(element, chord.Chord):
+                notes.append(element.pitches[-1].midi)
     return notes
 
 def list_to_midi(seq, path):
