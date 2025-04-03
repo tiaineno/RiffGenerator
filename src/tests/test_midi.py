@@ -9,6 +9,9 @@ from src.midi import midi_to_list, list_to_midi
 
 @pytest.fixture
 def create_file():
+    """
+    create a midi file to help testing
+    """
     test_input_path = './data/input/test.mid'
     test_notes = [60, 62, 64, 65, 67]
 
@@ -20,6 +23,9 @@ def create_file():
     return test_input_path, test_notes
 
 def test_list_to_midi(create_file, cleanup_files):
+    """
+    test if the function saves a list as a midi file correctly
+    """
     test_input_path, test_notes = create_file
     test_output_path = './data/output/testfolder/test_output.mid'
 
@@ -32,12 +38,18 @@ def test_list_to_midi(create_file, cleanup_files):
         assert data[:4] == b'MThd'
 
 def test_midi_to_list(create_file, cleanup_files):
+    """
+    test if the function converts midi file into a list correctly
+    """
     test_input_path, test_notes = create_file
     result = midi_to_list(test_input_path)
     assert result == test_notes
 
 @pytest.fixture
 def cleanup_files():
+    """
+    remove test files after testing
+    """
     yield
     test_input_path = './data/input/test.mid'
     test_folder_path = './data/output/testfolder'
