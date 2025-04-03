@@ -15,12 +15,12 @@ Itse algoritmi on testattu integraatiotestauksella, sillä siinä yhdistyvät ka
 
 Automaattisen testaamisen lisäksi manuaalinen/empiirinen testaaminen on ollut oleellinen osa kehitystä, sillä sävellysten luonnollisuuden arvioiminen vaatii myös niiden kuuntelua. Tätä varten olen käyttänyt tiedostoa manual_testing.py, sekä käyttöliittymää. Olen soittanut midi soittimella sekä kitaralla algoritmin tuottamia riffejä niitä testatessa.
 
-Testikattavuus:
-File                        statements  missing excluded coverage
-src/markov.py	            36          0   	0   	 100%
-src/midi.py	                21	        0	    0	     100%
-src/tests/test_markov.py	54	        0	    0	     100%
-src/tests/test_midi.py  	37	        0	    0	     100%
-src/tests/test_trie.py  	38	        0	    0	     100%
-src/trie.py             	37	        0	    0	     100%
-Total	                    223	        0	    0	     100%
+| File                       | Statements | Missing | Excluded | Coverage |
+|----------------------------|------------|---------|----------|----------|
+| src/markov.py              | 36         | 0       | 0        | 100%     |
+| src/midi.py                | 21         | 0       | 0        | 100%     |
+| src/tests/test_markov.py   | 54         | 0       | 0        | 100%     |
+| src/tests/test_midi.py     | 37         | 0       | 0        | 100%     |
+| src/tests/test_trie.py     | 38         | 0       | 0        | 100%     |
+| src/trie.py                | 37         | 0       | 0        | 100%     |
+| **Total**                  | **223**    | **0**   | **0**    | **100%** |
