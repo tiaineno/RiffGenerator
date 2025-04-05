@@ -63,12 +63,12 @@ def test_order2():
     for i in range(len(result)-3):
         found = False
         """
-        these loops will check if every sequence is part of input
+        hese loops will check if every sequence is part of input
         """
         for j in range(len(sequence)):
             if (sequence[j:j+3] == result[i:i+3] or
-                sequence[j:] + sequence[:j+3-len(sequence)] == result[i:i+3]):
-                    found = True
+            sequence[j:] + sequence[:j+3-len(sequence)] == result[i:i+3]):
+                found = True
         assert found is True
 
 def test_midi_insert():
@@ -87,8 +87,8 @@ def test_midi_insert():
         found = False
         for j in range(len(sequence)):
             if (sequence[j:j+5] == result[i:i+5] or
-                sequence[j:] + sequence[:j+5-len(sequence)] == result[i:i+5] or
-                sequence2[j:j+5] == result[i:i+5] or
-                sequence2[j:] + sequence2[:j+5-len(sequence2)] == result[i:i+5]):
-                    found = True
+            sequence[j:] + sequence[:j+5-len(sequence)] == result[i:i+5] or
+            sequence2[j:j+5] == result[i:i+5] or
+            sequence2[j:] + sequence2[:j+5-len(sequence2)] == result[i:i+5]):
+                found = True
         assert found is True

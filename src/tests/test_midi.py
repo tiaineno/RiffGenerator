@@ -1,7 +1,7 @@
 import sys
 import os
-import pytest
 import shutil
+import pytest
 from music21 import note, stream
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
