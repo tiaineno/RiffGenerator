@@ -28,25 +28,27 @@ class Trie:
 
         for i in range(len(sequence)-1):
             note = sequence[i]
+            if note in current.probabilities:
+                current.probabilities[note] += 1
+            else:
+                current.probabilities[note] = 1
             if not current.children[note]:
                 current.children[note] = Node()
             current = current.children[note]
 
-            next_note = sequence[i + 1]
-            if next_note in current.probabilities:
-                current.probabilities[next_note] += 1
-            else:
-                current.probabilities[next_note] = 1
+        note = sequence[-1]
+        if note in current.probabilities:
+            current.probabilities[note] += 1
+        else:
+            current.probabilities[note] = 1
 
     def find(self, sequence):
         """
-        takes a sequence as a parameter and returns the probabilites of the last node that exists
+        takes a sequence as a parameter and returns the probabilites of the last node
         """
         current = self.root
         for i in range(len(sequence)):
             note = sequence[i]
-            if current.children[note] is None:
-                return current.probabilities
             current = current.children[note]
         return current.probabilities
 

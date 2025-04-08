@@ -45,7 +45,7 @@ def test_right_key():
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
 
-    result = gen.generate(5, 40)
+    result = gen.generate(5)
 
     assert len(result) == 5
     assert all(note in sequence for note in result)
@@ -59,11 +59,11 @@ def test_order2():
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
 
-    result = gen.generate(20, 40)
+    result = gen.generate(20)
     for i in range(len(result)-3):
         found = False
         """
-        hese loops will check if every sequence is part of input
+        these loops will check if every sequence is part of input
         """
         for j in range(len(sequence)):
             if (sequence[j:j+3] == result[i:i+3] or
@@ -82,7 +82,7 @@ def test_midi_insert():
     gen.insert(sequence)
     gen.insert(sequence2)
 
-    result = gen.generate(20, 40)
+    result = gen.generate(20)
     for i in range(len(result)-5):
         found = False
         for j in range(len(sequence)):

@@ -1,5 +1,6 @@
 import sys
 import os
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
@@ -16,46 +17,58 @@ def test_node():
 def test_trie_find():
     """
     test if find method works
-    query_order_1 tests if trie can return the probabilities in a case where
-    the desired order isnt found
     """
     trie = Trie()
+    order = 2
 
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
-    for i in range(len(sequence)-2):
-        trie.insert(sequence[i:i+3])
+    for i in range(len(sequence)-order):
+        trie.insert(sequence[i:i+1+order])
 
     query = trie.find([40,41])
-    query_order_1 = trie.find([40,43])
-
     assert query == {40: 2, 43: 1}
-    assert query_order_1 == {41: 3, 42: 1}
 
 def test_trie_find_nonexistent():
     """
-    test if find works with nonexistent or empty sequences
+    test if find works with nonexistent sequences
     """
     trie = Trie()
+    order = 2
 
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
-    for i in range(len(sequence)-2):
-        trie.insert(sequence[i:i+3])
+    for i in range(len(sequence)-order):
+        trie.insert(sequence[i:i+1+order])
 
-    query_no_matches = trie.find([44,41])
-    assert query_no_matches == {}
+    with pytest.raises(AttributeError):
+        trie.find([44, 41])
 
-    empty_query = trie.find([])
-    assert empty_query == {}
+    with pytest.raises(AttributeError):
+        trie.find([40, 43])
+
+def test_trie_find_empty():
+    """
+    test if find works with an empty sequence
+    """
+    trie = Trie()
+    order = 2
+
+    sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
+    for i in range(len(sequence)-order):
+        trie.insert(sequence[i:i+1+order])
+
+    query = trie.find([])
+    assert query == {40: 4, 41: 3, 43: 1}
 
 def test_trie_insert_more_and_find():
     """
     test if inserting multiple sequences works
     """
     trie = Trie()
+    order = 2
 
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
-    for i in range(len(sequence)-2):
-        trie.insert(sequence[i:i+3])
+    for i in range(len(sequence)-order):
+        trie.insert(sequence[i:i+1+order])
 
     trie.insert([44, 41, 40])
     trie.insert([40, 41, 45])
@@ -70,10 +83,11 @@ def test_trie_repr():
     test if repr works
     """
     trie = Trie()
+    order = 2
 
     sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
-    for i in range(len(sequence)-2):
-        trie.insert(sequence[i:i+3])
+    for i in range(len(sequence)-order):
+        trie.insert(sequence[i:i+1+order])
 
     tree = repr(trie)
     assert "Node(children=[41, 42], probabilities={41: 3, 42: 1})" in tree

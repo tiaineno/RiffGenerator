@@ -24,13 +24,9 @@ class Generator:
     def insert(self, sequence):
         """
         Takes a list of midi notes as a parameter and inserts every sub sequence into the trie
-        In the end the of the input the missing notes are taken from the beginning
         """
-        for i in range(len(sequence)):
-            if i < len(sequence)-self.order:
-                seq = sequence[i:i+1+self.order]
-            else:
-                seq = sequence[i:] + sequence[:i+1+self.order-len(sequence)]
+        for i in range(len(sequence)-self.order):
+            seq = sequence[i:i+1+self.order]
             self.trie.insert(seq)
 
     def isempty(self):
@@ -48,19 +44,22 @@ class Generator:
             return {}
         return {note: count / total for note, count in probabilities.items()}
 
-    def generate(self, length, starting_note):
+    def generate(self, length):
         """
         generates and returns a sequence based on inserted data
-        takes the length of the sequence and the starting note as parameters
+        takes the length of the sequence as a parameter
+        starts the generation again if a note isnt found
         """
-        sequence = [starting_note]
-        for _ in range(length-1):
-            if len(sequence) < self.order:
-                probabilities = self.trie.find(sequence)
-            else:
-                probabilities = self.trie.find(sequence[-self.order:])
-            probabilities = self.get_probabilities(probabilities)
-            next_note = random.choices(list(probabilities.keys()),
-                                       weights=probabilities.values())[0]
-            sequence.append(next_note)
-        return sequence
+        while True:
+            try:
+                sequence = []
+                for _ in range(length):
+                    probabilities = self.trie.find(sequence[-self.order:])
+                    probabilities = self.get_probabilities(probabilities)
+
+                    next_note = random.choices(list(probabilities.keys()),
+                                            weights=probabilities.values())[0]
+                    sequence.append(next_note)
+                return sequence
+            except AttributeError:
+                continue

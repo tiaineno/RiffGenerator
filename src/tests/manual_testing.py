@@ -16,7 +16,7 @@ for file in os.listdir("./data/input/metallica"):
     print(f"Inserting file {file}")
     metallica.insert(midi.midi_to_list(os.path.join("./data/input/metallica", file)))
 
-metallica_output = metallica.generate(16,40)
+metallica_output = metallica.generate(16)
 print("")
 print("Random midi sequence generated with 4 metallica songs as an input:")
 print(metallica_output)

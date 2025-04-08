@@ -13,7 +13,6 @@ class RiffGenerator:
     def __init__(self):
         self.generator = None
         self.length = None
-        self.starting_note = None
 
     def start(self):
         """
@@ -59,7 +58,7 @@ class RiffGenerator:
         """
         A function that will generate, print and possibly save a sequence with the given parameters
         """
-        output = self.generator.generate(self.length, self.starting_note)
+        output = self.generator.generate(self.length)
         print("generated sequence:")
         print(output)
 
@@ -85,16 +84,10 @@ class RiffGenerator:
             while True:
                 try:
                     self.length = int(input("Length: "))
-                    self.starting_note = int(input("Note: "))
                 except ValueError:
-                    print("Invalid input. Please enter integers for length and note.")
+                    print("Invalid input. Please enter an integer for the length")
                     continue
-
-                try:
-                    self.generate()
-                except IndexError:
-                    print("Something went wrong, try a different starting note.")
-                    continue
+                self.generate()
 
                 while True:
                     print("Choose what to do next:")
