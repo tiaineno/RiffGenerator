@@ -73,7 +73,7 @@ class RiffGenerator:
         """
         runs the ui loop
         """
-        print("Welcome to the riff generator!")
+        print("Welcome to the riff generator! Check README.md for instructions.")
         while True:
             self.start()
 
@@ -81,32 +81,28 @@ class RiffGenerator:
             "enter to generate")
             self.input()
 
+            try:
+                self.length = int(input("Length: "))
+            except ValueError:
+                print("Invalid input. Please enter an integer for the length")
+                continue
+
+            self.generate()
+
             while True:
+                print("Choose what to do next:")
+                print("0 = Start over")
+                print("1 = Generate again with the same settings")
+
                 try:
-                    self.length = int(input("Length: "))
+                    choice = int(input("Choice: "))
                 except ValueError:
-                    print("Invalid input. Please enter an integer for the length")
+                    print("Invalid input. Please enter 0 or 1")
                     continue
-                self.generate()
-
-                while True:
-                    print("Choose what to do next:")
-                    print("0 = Start over")
-                    print("1 = Generate again with the same settings")
-                    print("2 = Change settings and keep the input")
-
-                    try:
-                        choice = int(input("Choice: "))
-                    except ValueError:
-                        print("Invalid input. Please enter 0, 1, or 2.")
-                        continue
-
-                    if choice in (0, 2):
-                        break
-                    if choice == 1:
-                        self.generate()
-                    else:
-                        print("Invalid choice. Please enter 0, 1, or 2.")
 
                 if choice == 0:
                     break
+                if choice == 1:
+                    self.generate()
+                else:
+                    print("Invalid input. Please enter 0 or 1")
