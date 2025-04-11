@@ -11,7 +11,7 @@ def test_node():
     test if single node is initialized correctly
     """
     node = Node()
-    assert node.children == [None] * 128
+    assert node.children == {}
     assert node.probabilities == {}
 
 def test_trie_find():
@@ -39,10 +39,10 @@ def test_trie_find_nonexistent():
     for i in range(len(sequence)-order):
         trie.insert(sequence[i:i+1+order])
 
-    with pytest.raises(AttributeError):
+    with pytest.raises(KeyError):
         trie.find([44, 41])
 
-    with pytest.raises(AttributeError):
+    with pytest.raises(KeyError):
         trie.find([40, 43])
 
 def test_trie_find_empty():

@@ -4,11 +4,11 @@ class Node:
     the number of children is 128 since that is the amount of midi notes
     """
     def __init__(self):
-        self.children = [None] * 128
+        self.children = {}
         self.probabilities = {}
 
     def __repr__(self):
-        children = [i for i, child in enumerate(self.children) if child]
+        children = list(self.children.keys())
         return f"Node(children={children}, probabilities={self.probabilities})"
 
 class Trie:
@@ -32,7 +32,7 @@ class Trie:
                 current.probabilities[note] += 1
             else:
                 current.probabilities[note] = 1
-            if not current.children[note]:
+            if note not in current.children:
                 current.children[note] = Node()
             current = current.children[note]
 
@@ -58,9 +58,8 @@ class Trie:
         """
         def traverse(node, level=0):
             result = "  " * level + repr(node) + "\n"
-            for child in node.children:
-                if child:
-                    result += traverse(child, level + 1)
+            for child in node.children.values():
+                result += traverse(child, level + 1)
             return result
 
         return traverse(self.root)

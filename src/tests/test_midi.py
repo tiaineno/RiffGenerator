@@ -1,60 +1,33 @@
 import sys
 import os
-import shutil
-import pytest
-from music21 import note, stream
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.midi import midi_to_list, list_to_midi
 
-@pytest.fixture
-def create_file():
-    """
-    create a midi file to help testing
-    """
-    test_input_path = './data/input/test.mid'
-    test_notes = [60, 62, 64, 65, 67]
-
-    midi_stream = stream.Stream()
-    for element in test_notes:
-        midi_stream.append(note.Note(element))
-    midi_stream.write('midi', fp=test_input_path)
-
-    return test_input_path, test_notes
-
-def test_list_to_midi(create_file, cleanup_files):
+def test_list_to_midi():
     """
     test if the function saves a list as a midi file correctly
     """
-    test_input_path, test_notes = create_file
-    test_output_path = './data/output/testfolder/test_output.mid'
+    midi = [40, 41, 42, 43, 44]
+    path = "data/output/test_output.mid"
+    list_to_midi(midi, path)
+    
+    assert os.path.exists(path)
 
-    list_to_midi(test_notes, test_output_path)
-
-    assert os.path.exists(test_output_path)
-
-    with open(test_output_path, 'rb') as f:
+    with open(path, 'rb') as f:
         data = f.read(4)
         assert data[:4] == b'MThd'
 
-def test_midi_to_list(create_file, cleanup_files):
-    """
-    test if the function converts midi file into a list correctly
-    """
-    test_input_path, test_notes = create_file
-    result = midi_to_list(test_input_path)
-    assert result == test_notes
+    os.remove(path)
 
-@pytest.fixture
-def cleanup_files():
+def test_midi_to_list():
     """
-    remove test files after testing
+    test if the function converts midi file into two lists correctly
     """
-    yield
-    test_input_path = './data/input/test.mid'
-    test_folder_path = './data/output/testfolder'
-
-    if os.path.exists(test_input_path):
-        os.remove(test_input_path)
-    if os.path.exists(test_folder_path):
-        shutil.rmtree(test_folder_path)
+    path = "./data/input/nevergonnagiveyouup.mid"
+    result = midi_to_list(path)
+    #melody
+    assert result[0][:10] == [61, 61, 58, 61, 63, 60, 58, 60, 58, 56]
+    #rhythm
+    assert result[1][:2] == ['rest0.5 note0.25 rest0.25 note0.5 note0.5 note0.5 note0.75 rest0.75 ',
+                             'rest0.5 note0.5 note0.5 note0.75 note0.25 note0.75 rest0.75 ']

@@ -6,15 +6,19 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../.
 from src.markov import Generator
 from src.midi import midi_to_list
 
+melody = [61, 61, 58, 61, 63, 60, 58, 60, 58, 56]
+rhythm = ['rest0.5 note0.25 rest0.25 note0.5 note0.5 note0.5 note0.75 rest0.75 ',
+                             'rest0.5 note0.5 note0.5 note0.75 note0.25 note0.75 rest0.75 ']
+sequence = (melody, rhythm)
+
 def test_insert():
     """
     test if a sequence is inserted correctly
     """
     gen = Generator(3)
-    sequence = [60, 62, 64, 65, 67, 69, 71, 72]
     gen.insert(sequence)
 
-    assert gen.trie.find([60, 62]) == {64: 1}
+    assert gen.harmony.find([60, 58]) == {60: 1}
 
 def test_probs():
     """
@@ -33,7 +37,6 @@ def test_isempty():
     gen = Generator(3)
     assert gen.isempty() is True
 
-    sequence = [60, 62, 64, 65, 67, 69, 71, 72]
     gen.insert(sequence)
     assert gen.isempty() is False
 
@@ -42,13 +45,12 @@ def test_right_key():
     test if all the notes exist in the input after generating with order 1
     """
     gen = Generator(1)
-    sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
 
     result = gen.generate(5)
 
     assert len(result) == 5
-    assert all(note in sequence for note in result)
+    assert all(note in melody for note in result)
 
 def test_order2():
     """
@@ -56,18 +58,16 @@ def test_order2():
     should be in the input
     """
     gen = Generator(2)
-    sequence = [40, 41, 40, 41, 43, 40, 41, 40, 42, 43]
     gen.insert(sequence)
-
     result = gen.generate(20)
     for i in range(len(result)-3):
         found = False
         """
         these loops will check if every sequence is part of input
         """
-        for j in range(len(sequence)):
-            if (sequence[j:j+3] == result[i:i+3] or
-            sequence[j:] + sequence[:j+3-len(sequence)] == result[i:i+3]):
+        for j in range(len(melody)):
+            if (melody[j:j+3] == result[i:i+3] or
+            melody[j:] + melody[:j+3-len(melody)] == result[i:i+3]):
                 found = True
         assert found is True
 
@@ -85,10 +85,10 @@ def test_midi_insert():
     result = gen.generate(20)
     for i in range(len(result)-5):
         found = False
-        for j in range(len(sequence)):
-            if (sequence[j:j+5] == result[i:i+5] or
-            sequence[j:] + sequence[:j+5-len(sequence)] == result[i:i+5] or
-            sequence2[j:j+5] == result[i:i+5] or
-            sequence2[j:] + sequence2[:j+5-len(sequence2)] == result[i:i+5]):
+        for j in range(len(sequence[0])):
+            if (sequence[0][j:j+5] == result[i:i+5] or
+            sequence[0][j:] + sequence[0][:j+5-len(sequence[0])] == result[i:i+5] or
+            sequence2[0][j:j+5] == result[i:i+5] or
+            sequence2[0][j:] + sequence2[0][:j+5-len(sequence2[0])] == result[i:i+5]):
                 found = True
         assert found is True

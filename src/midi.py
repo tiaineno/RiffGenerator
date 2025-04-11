@@ -3,19 +3,28 @@ from music21 import converter, note, chord, stream
 
 def midi_to_list(path):
     """
-    converts a given midi file into a list of notes and returns it
+    converts a given midi file into two lists:
+    one with the pitches and one with the rhythms, measure by measure
     """
     midi_data = converter.parse(path)
     notes = []
-
+    rhythms = []
     for part in midi_data.parts:
-        for element in part.flatten().notes:
-            if isinstance(element, note.Note):
-                notes.append(element.pitch.midi)
-            #using root notes
-            if isinstance(element, chord.Chord):
-                notes.append(element.pitches[-1].midi)
-    return notes
+        for measure in part.getElementsByClass('Measure'):
+            bar = ""
+            for element in measure.notesAndRests:
+                if isinstance(element, note.Note):
+                    notes.append(element.pitch.midi)
+                #using root notes
+                if isinstance(element, chord.Chord):
+                    notes.append(element.pitches[-1].midi)
+
+                if isinstance(element, note.Rest):
+                    bar += (f"rest{str(element.quarterLength)} ")
+                else:
+                    bar += (f"note{str(element.quarterLength)} ")
+            rhythms.append(bar)
+    return (notes, rhythms)
 
 def list_to_midi(seq, path):
     """
