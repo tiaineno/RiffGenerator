@@ -46,11 +46,17 @@ class RiffGenerator:
                 for file in os.listdir(full_path):
                     if file.endswith(".mid"):
                         print(f"Inserting file {file}")
-                        self.generator.insert(midi.midi_to_list(os.path.join(full_path, file)))
+                        try:
+                            self.generator.insert(midi.midi_to_list(os.path.join(full_path, file)))
+                        except ValueError:
+                            print(f"File {file} is too short, cannot insert.")
                 print(f"Folder {path} succesfully inserted")
             elif os.path.isfile(full_path):
-                self.generator.insert(midi.midi_to_list(full_path))
-                print(f"File {path} succesfully inserted")
+                try:
+                    self.generator.insert(midi.midi_to_list(full_path))
+                    print(f"File {path} succesfully inserted")
+                except ValueError:
+                    print(f"File {path} is too short, cannot insert.")
             else:
                 print("Invalid path. Please enter a valid file or folder.")
 
@@ -93,16 +99,20 @@ class RiffGenerator:
                 print("Choose what to do next:")
                 print("0 = Start over")
                 print("1 = Generate again with the same settings")
+                print("2 = Exit")
 
                 try:
                     choice = int(input("Choice: "))
                 except ValueError:
-                    print("Invalid input. Please enter 0 or 1")
+                    print("Invalid input. Please enter 0, 1 or 2")
                     continue
 
                 if choice == 0:
                     break
                 if choice == 1:
                     self.generate()
+                elif choice == 2:
+                    print("Thank you!")
+                    sys.exit()
                 else:
-                    print("Invalid input. Please enter 0 or 1")
+                    print("Invalid input. Please enter 0, 1 or 2")

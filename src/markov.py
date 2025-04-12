@@ -26,9 +26,14 @@ class Generator:
     def insert(self, sequence):
         """
         Takes a list of midi notes as a parameter and inserts every sub sequence into the tries
+        Raises an error if the amount of measures and notes is less than the order
         """
         pitches = sequence[0]
         measures = sequence[1]
+
+        if len(pitches) <= self.order and len(measures) <= self.order:
+            raise ValueError("Midi seq too short")
+
         for i in range(len(pitches)-self.order):
             seq = pitches[i:i+1+self.order]
             self.harmony.insert(seq)

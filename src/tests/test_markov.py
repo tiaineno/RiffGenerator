@@ -1,5 +1,6 @@
 import sys
 import os
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
@@ -19,6 +20,14 @@ def test_insert():
     gen.insert(sequence)
 
     assert gen.harmony.find([60, 58]) == {60: 1}
+
+def test_insert_too_short():
+    """
+    Test if the class handles too short midi seqs correctly
+    """
+    gen = Generator(12)
+    with pytest.raises(ValueError):
+        gen.insert(sequence)
 
 def test_probs():
     """
