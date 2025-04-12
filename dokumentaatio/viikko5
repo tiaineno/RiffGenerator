@@ -1,0 +1,26 @@
+Mitä olen tehnyt tällä viikolla?
+
+Muutin syötteen lisäystä niin, ettei viimeisiä nuotteja lisätä täysin, jolloin generointia yritetään uudelleen tähän liittyvän virheen sattuessa
+Lisäsin myös rytmin tallentamisen omaan tietorakenteeseensa tahti kerrallaan.
+Lisäsin uusia input tiedostoja: sekä lisää metallica kappaleita, kuin myös beatlesin laulumelodioita.
+Toteutin myös vertaisarvioinnin ehdotukset ja muita pieniä muutoksia
+
+Miten ohjelma on edistynyt?
+
+Käyttöliittymää ja generointia on paranneltu, rytmin mukaanotto edistynyt paljon
+
+Mitä opin tällä viikolla / tänään?
+
+Pyrin tekemään ohjelmasta mahdollisimman helppokäyttöisen kun aloin miettimään käyttäjäkokemusta.
+Ymmärsin paremmin rytmiin liittyviä ongelmia.
+
+Mikä jäi epäselväksi tai tuottanut vaikeuksia?
+
+Rytmin lisäämisen toteutin aluksi niin, että nuotteja lisätään peräkkäin välittämättä tahdeista, mutta se ei kuulostanut luontevalta.
+Myös tahtikohtainen lähestymistapa on tuottanut joitain ongelmia.
+Beatlesin kappaleiden lisäys on vaikeaa transponoinnin takia. Kappaleet eivät myöskään tiukasti noudata sävellajeja.
+
+Mitä teen seuraavaksi?
+
+Korjaan beatlesin kappaleiden sävellajit ja lisään uutta syötettä
+Teen rytmin loppuun

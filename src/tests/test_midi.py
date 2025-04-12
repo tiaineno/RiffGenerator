@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.midi import midi_to_list, list_to_midi
@@ -9,7 +10,7 @@ def test_list_to_midi():
     test if the function saves a list as a midi file correctly
     """
     midi = [40, 41, 42, 43, 44]
-    path = "data/output/test_output.mid"
+    path = "data/output/test/test_output.mid"
     list_to_midi(midi, path)
     
     assert os.path.exists(path)
@@ -18,7 +19,7 @@ def test_list_to_midi():
         data = f.read(4)
         assert data[:4] == b'MThd'
 
-    os.remove(path)
+    shutil.rmtree("data/output/test")
 
 def test_midi_to_list():
     """
