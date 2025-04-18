@@ -88,7 +88,7 @@ class RiffGenerator:
             self.input()
 
             try:
-                self.length = int(input("Length: "))
+                self.length = int(input("Length (in measures): "))
             except ValueError:
                 print("Invalid input. Please enter an integer for the length")
                 continue

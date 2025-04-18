@@ -59,22 +59,41 @@ class Generator:
     def generate(self, length):
         """
         generates and returns a sequence based on inserted data
-        takes the length of the sequence as a parameter
-        starts the generation again if a note isnt found
+        takes the length of measures as a parameter
+        starts the generation again if a note/bar isnt found
 
-        rhythm is ignored for now
+        after the rhythm is generated, the pitches will be generated
+        separately and they will be returned as a tuple
         """
         while True:
+            rhythm = []
+            note_count = 0
             try:
-                sequence = []
                 for _ in range(length):
-                    probabilities = self.harmony.find(sequence[-self.order:])
+                    probabilities_rhythm = self.rhythm.find(rhythm[-self.order:])
+                    probabilities_rhythm = self.get_probabilities(probabilities_rhythm)
+
+                    next_rhythm = random.choices(list(probabilities_rhythm.keys()),
+                                            weights=probabilities_rhythm.values())[0]
+                    note_count += next_rhythm.count("note")
+                    rhythm.append(next_rhythm)
+                break
+            except KeyError:
+                continue
+
+        #melody generation
+        while True:
+            melody = []
+            try:
+                for _ in range(note_count):
+                    probabilities = self.harmony.find(melody[-self.order:])
                     probabilities = self.get_probabilities(probabilities)
 
                     next_note = random.choices(list(probabilities.keys()),
                                             weights=probabilities.values())[0]
 
-                    sequence.append(next_note)
-                return sequence
+                    melody.append(next_note)
+                break
             except KeyError:
                 continue
+        return (melody, rhythm)
