@@ -31,7 +31,7 @@ class Generator:
         pitches = sequence[0]
         measures = sequence[1]
 
-        if len(pitches) <= self.order and len(measures) <= self.order:
+        if len(pitches) <= self.order or len(measures) <= self.order:
             raise ValueError("Midi seq too short")
 
         for i in range(len(pitches)-self.order):

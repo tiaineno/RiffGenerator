@@ -24,10 +24,11 @@ there is currently some inconsistency with chords;
 in some cases other than the root note will be added
 """
 def parse_measure(measure, notes):
-    bar = []
-    if isinstance(measure[0], stream.Voice):
-        return(parse_measure(measure[0], notes))
+    for i in measure:
+        if isinstance(i, stream.Voice):
+            return(parse_measure(i, notes))
 
+    bar = []
     events = sorted(measure.notesAndRests, key=lambda e: e.offset)
     for i in range(len(events)):
         element = events[i]
@@ -67,8 +68,6 @@ def midi_to_list(path):
     for part in midi_data.parts:
         for measure in part.getElementsByClass('Measure'):
             bar = parse_measure(measure, notes)
-            if not bar:
-                continue
 
             empty_bar = not any("note" in e for e in bar)
             if empty_bar and prev_empty_bar:
