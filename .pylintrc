@@ -136,7 +136,6 @@ attr-naming-style=snake_case
 
 # Bad variable names which should always be refused, separated by a comma.
 bad-names=foo,
-          bar,
           baz,
           toto,
           tutu,
@@ -443,7 +442,8 @@ disable=raw-checker-failed,
         missing-module-docstring,
         wrong-import-position,
         too-few-public-methods,
-        consider-using-enumerate
+        consider-using-enumerate,
+        pointless-string-statement
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

@@ -43,3 +43,8 @@ run coverage and generate the report:
 poetry run coverage run -m pytest
 poetry run coverage html
 ```
+
+pylint:
+```bash
+pylint src
+```

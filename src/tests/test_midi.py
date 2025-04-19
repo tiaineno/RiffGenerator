@@ -1,7 +1,6 @@
 import sys
 import os
 import shutil
-import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from src.midi import midi_to_list, list_to_midi
@@ -29,7 +28,7 @@ def test_list_to_midi():
 
     path = "data/output/test/test_output.mid"
     list_to_midi(sequence, path)
-    
+
     assert os.path.exists(path)
 
     with open(path, 'rb') as f:
@@ -44,6 +43,10 @@ def test_list_to_midi():
     shutil.rmtree("data/output/test")
 
 def test_voice():
+    """
+    test for a special occasion where the notes of a chord have
+    different durations
+    """
     result = midi_to_list("data/input/test_ukkonooa.mid")
     path = "data/output/test/ukko.mid"
     list_to_midi(result, path)
@@ -56,6 +59,9 @@ def test_voice():
     shutil.rmtree("data/output/test")
 
 def test_nonexistent_bar(capfd):
+    """
+    test if the empty bars are not added
+    """
     melody = [61]
     rhythm = ['rest4.0', 'rest0.0', 'note4.0']
     sequence = (melody, rhythm)
@@ -63,7 +69,7 @@ def test_nonexistent_bar(capfd):
     path = "data/output/test/test_output.mid"
     list_to_midi(sequence, path)
 
-    out, err = capfd.readouterr()
+    out = capfd.readouterr()[0]
     assert "Error with a measure with total duration of 0.0" in out
 
     shutil.rmtree("data/output/test")

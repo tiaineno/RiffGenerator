@@ -1,0 +1,24 @@
+Mitä olen tehnyt tällä viikolla?
+
+Muutin ohjelmaa niin, että se palauttaa myös rytmin.
+Tätä varten jouduin myös muokkaamaan midi moduulia.
+Tein uusille ominaisuuksille testit ja muokkasin syötetiedostoja.
+Aloin luomaan myös kattavampaa syöte kantaa eri artistien kappaleista.
+
+Miten ohjelma on edistynyt?
+
+Itse ohjelma on nyt valmis, lukuunottamatta yhtä mahdollista parannusta.
+
+Mitä opin tällä viikolla / tänään?
+
+Rytmiin liittyen nousi esiin monia ongelmia, joita ratkoin.
+
+Mikä jäi epäselväksi tai tuottanut vaikeuksia?
+
+Midi tiedostojen purkamisessa ilmeni ongelmia liittyen esimerkiksi päällekkäisiin nuotteihin.
+Tämä aiheuttaa edelleen pientä epäsäännöllisyyttä esim sointujen purkamisessa, mutta sain selvitettyä muut ongelmat.
+Myös syötteiden valinta on osoittautunut haastavaksi, sillä esimerkiksi beatlesin kappaleet harvoin noudattavat samaa sävellajia tarkasti.
+
+Mitä teen seuraavaksi?
+
+Lisään lisää syöte dataa ja parantelen koodin laatua

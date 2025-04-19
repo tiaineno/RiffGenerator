@@ -1,32 +1,31 @@
 import os
 from fractions import Fraction
-from music21 import converter, note, chord, stream, meter
+from music21 import converter, note, chord, stream, meter, exceptions21
 
-"""
-util to helps in setting the meter
-"""
 def parse_duration(duration_str):
+    """
+    util to help in setting the meter
+    """
     duration_str = duration_str[4:]
     if '/' in duration_str:
         return float(Fraction(duration_str))
-    else:
-        return float(duration_str)
+    return float(duration_str)
 
-"""
-util which returns the rhythm of the measure and adds the pitches
-to the list
-
-parameters:
-measure: measure to be parsed
-notes: a list where the pitches will be added
-
-there is currently some inconsistency with chords;
-in some cases other than the root note will be added
-"""
 def parse_measure(measure, notes):
+    """
+    util which returns the rhythm of the measure and adds the pitches
+    to the list
+
+    parameters:
+    measure: measure to be parsed
+    notes: a list where the pitches will be added
+
+    there is currently some inconsistency with chords;
+    in some cases other than the root note will be added
+    """
     for i in measure:
         if isinstance(i, stream.Voice):
-            return(parse_measure(i, notes))
+            return parse_measure(i, notes)
 
     bar = []
     events = sorted(measure.notesAndRests, key=lambda e: e.offset)
@@ -90,6 +89,7 @@ def list_to_midi(seq, path):
         elements = measure.strip().split()
         measure_stream = stream.Measure()
         total_duration = 0
+
         for element in elements:
             duration = parse_duration(element)
             if element[:4] == "note":
@@ -103,15 +103,15 @@ def list_to_midi(seq, path):
                 r.quarterLength = duration
                 midi_stream.append(r)
                 total_duration += duration
+
         try:
             m = meter.TimeSignature(f"{int(total_duration)}/4")
             measure_stream.insert(0, m)
-        except:
+        except exceptions21.MeterException:
             print(f"Error with a measure with total duration of {total_duration}")
         midi_stream.append(measure_stream)
 
-    folder_path = os.path.dirname(path)
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
+    if not os.path.exists(os.path.dirname(path)):
+        os.makedirs(os.path.dirname(path))
 
     midi_stream.write('midi', fp=path)
