@@ -98,7 +98,7 @@ def test_order2():
     should be in the input
     """
     gen = Generator(2)
-    sequence2 = midi_to_list("./data/input/nevergonnagiveyouup.mid")
+    sequence2 = midi_to_list("./data/input/minor/nevergonnagiveyouup.mid")
     gen.insert(sequence2)
     result = gen.generate(16)
 
@@ -110,8 +110,8 @@ def test_multiple_insert():
     Test if inserting (multiple) midi-files works (using order 3)
     """
     gen = Generator(3)
-    sequence3 = midi_to_list("./data/input/beatles/letitbe.mid")
-    sequence4 = midi_to_list("./data/input/beatles/blackbird.mid")
+    sequence3 = midi_to_list("./data/input/minor/nevergonnagiveyouup.mid")
+    sequence4 = midi_to_list("./data/input/minor/hurt.mid")
 
     gen.insert(sequence3)
     gen.insert(sequence4)

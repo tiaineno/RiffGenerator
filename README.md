@@ -23,9 +23,9 @@ poetry run python src/index.py
 ### order
 Order will determine how many previous notes the program considers when generating the next one. Smaller number will lead to more random results. 2 is a good starting point (3 with large amount of input)
 ### midi files
-You can use the default input files when testing the program. The recommended input for testing is the folder "beatles", just type beatles in the prompt to insert the whole folder. Other default files include the folder "metallica" and the files nevergonnagiveyouup.mid and tuikituikitahtonen.mid.
+You can use the default input files when testing the program. Just type "minor" or "major" to insert the folders (inserting both at the same time will lead to unnatural generation). You can also use your own midi files by moving them into the input folder.
+Inserting single midi files is possible as well by typing the file name ("test_ukkonooa.mid", "minor/hurt.mid").
 
-You can also use your own midi-files (or folders with midi-files) by moving them in data/input. Don't forget the .mid-ending when typing single files. 
 ### length
 Length of the midi sequence (in measures). 32 measures is usually long enough for testing.
 

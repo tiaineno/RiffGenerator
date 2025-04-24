@@ -9,13 +9,12 @@ def test_midi_to_list():
     """
     test if the function converts midi file into two lists correctly
     """
-    path = "./data/input/nevergonnagiveyouup.mid"
+    path = "./data/input/major/letitbe.mid"
     result = midi_to_list(path)
     #melody
-    assert result[0][:10] == [61, 61, 58, 61, 63, 60, 58, 60, 58, 56]
+    assert result[0][:10] == [52, 52, 52, 52, 54, 49, 52, 52, 57, 59]
     #rhythm
-    assert result[1][:2] == ['rest0.5 note0.25 rest0.25 note0.5 note0.5 note0.5 note0.75 rest0.75',
-                             'rest0.5 note0.5 note0.5 note0.75 note0.25 note0.75 rest0.75']
+    assert result[1][:2] == ['rest4.0', 'rest3.5 note0.25 note0.25']
 
 def test_list_to_midi():
     """
