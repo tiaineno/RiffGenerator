@@ -2,16 +2,16 @@ import os
 from fractions import Fraction
 from music21 import converter, note, chord, stream, meter, exceptions21
 
-def parse_duration(duration_str):
+def parse_duration(duration: str) -> float:
     """
     util to help in setting the meter
     """
-    duration_str = duration_str[4:]
-    if '/' in duration_str:
-        return float(Fraction(duration_str))
-    return float(duration_str)
+    duration = duration[4:]
+    if '/' in duration:
+        return float(Fraction(duration))
+    return float(duration)
 
-def parse_measure(measure, notes):
+def parse_measure(measure: stream.Measure, pitches: list[int]) -> list[str]:
     """
     util which returns the rhythm of the measure and adds the pitches
     to the list
@@ -25,7 +25,7 @@ def parse_measure(measure, notes):
     """
     for i in measure:
         if isinstance(i, stream.Voice):
-            return parse_measure(i, notes)
+            return parse_measure(i, pitches)
 
     bar = []
     events = sorted(measure.notesAndRests, key=lambda e: e.offset)
@@ -33,19 +33,21 @@ def parse_measure(measure, notes):
         element = events[i]
         dur = float(element.quarterLength)
 
-        #this will prevent the insertion of overlaping notes
+        #this will be needed after the issue with chords is fixed
+        """
         if i < len(events)-1:
             start = element.offset
             next_note = events[i+1]
             if next_note.offset < start+dur:
                 dur = next_note.offset - start
+        """
 
         if isinstance(element, note.Note):
-            notes.append(element.pitch.midi)
+            pitches.append(element.pitch.midi)
             bar.append(f"note{dur}")
 
         elif isinstance(element, chord.Chord):
-            notes.append(min(p.midi for p in element.pitches))
+            pitches.append(min(p.midi for p in element.pitches))
             bar.append(f"note{dur}")
 
         elif isinstance(element, note.Rest):
@@ -60,13 +62,13 @@ def midi_to_list(path):
     consecutive empty bars wont be added
     """
     midi_data = converter.parse(path)
-    notes = []
+    pitches = []
     rhythms = []
     prev_empty_bar = False
 
     for part in midi_data.parts:
         for measure in part.getElementsByClass('Measure'):
-            bar = parse_measure(measure, notes)
+            bar = parse_measure(measure, pitches)
 
             empty_bar = not any("note" in e for e in bar)
             if empty_bar and prev_empty_bar:
@@ -74,7 +76,7 @@ def midi_to_list(path):
             prev_empty_bar = empty_bar
 
             rhythms.append(" ".join(bar).strip())
-    return (notes, rhythms)
+    return (pitches, rhythms)
 
 def list_to_midi(seq, path):
     """
@@ -84,7 +86,7 @@ def list_to_midi(seq, path):
     melody, rhythms = seq
     midi_stream = stream.Stream()
 
-    i = 0
+    melody_index = 0
     for measure in rhythms:
         elements = measure.strip().split()
         measure_stream = stream.Measure()
@@ -93,11 +95,11 @@ def list_to_midi(seq, path):
         for element in elements:
             duration = parse_duration(element)
             if element[:4] == "note":
-                n = note.Note(melody[i])
+                n = note.Note(melody[melody_index])
                 n.quarterLength = duration
                 midi_stream.append(n)
                 total_duration += duration
-                i += 1
+                melody_index += 1
             elif element[:4] == "rest":
                 r = note.Rest()
                 r.quarterLength = duration
@@ -107,9 +109,9 @@ def list_to_midi(seq, path):
         try:
             m = meter.TimeSignature(f"{int(total_duration)}/4")
             measure_stream.insert(0, m)
+            midi_stream.append(measure_stream)
         except exceptions21.MeterException:
             print(f"Error with a measure with total duration of {total_duration}")
-        midi_stream.append(measure_stream)
 
     if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))

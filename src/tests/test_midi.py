@@ -54,7 +54,7 @@ def test_voice():
     assert result[1] == ['note1.0 note1.0 note1.0 note1.0',
                          'note1.0 note1.0 note1.0 note1.0',
                          'note1.0 note1.0 note1.0 note1.0',
-                         'note2.0 rest2.0']
+                         'note3.0 rest1.0']
     shutil.rmtree("data/output/test")
 
 def test_nonexistent_bar(capfd):

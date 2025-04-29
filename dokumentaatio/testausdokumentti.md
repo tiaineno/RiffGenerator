@@ -19,11 +19,11 @@ Automaattisen testaamisen lisäksi manuaalinen/empiirinen testaaminen on ollut o
 Testikattavuus 18.4.2025:
 Name                       Stmts   Miss  Cover
 ----------------------------------------------
-src/markov.py                 58      0   100%
-src/midi.py                   78      0   100%
-src/tests/test_markov.py      67      0   100%
-src/tests/test_midi.py        41      0   100%
-src/tests/test_trie.py        56      0   100%
-src/trie.py                   37      0   100%
+src\markov.py                 48      0   100%
+src\midi.py                   71      0   100%
+src\tests\test_markov.py      67      0   100%
+src\tests\test_midi.py        40      0   100%
+src\tests\test_trie.py        56      0   100%
+src\trie.py                   37      0   100%
 ----------------------------------------------
-TOTAL                        337      0   100%
+TOTAL                        319      0   100%

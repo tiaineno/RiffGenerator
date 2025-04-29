@@ -40,13 +40,13 @@ def test_insert_too_short():
 
 def test_probs():
     """
-    test if probablities are counted correctly
+    test if the probablities are counted correctly
     """
     gen = Generator(3)
     probs = {64: 1, 65:2}
-    assert gen.get_probabilities(probs) == {64:1/3, 65:2/3}
+    assert gen.normalize_probabilities(probs) == {64:1/3, 65:2/3}
     probs_empty = {}
-    assert gen.get_probabilities(probs_empty) == {}
+    assert gen.normalize_probabilities(probs_empty) == {}
 
 def test_isempty():
     """

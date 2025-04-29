@@ -1,7 +1,6 @@
 class Node:
     """
-    implementation of a single node,
-    the number of children is 128 since that is the amount of midi notes
+    implementation of a single note
     """
     def __init__(self):
         self.children = {}
@@ -18,7 +17,7 @@ class Trie:
     def __init__(self):
         self.root = Node()
 
-    def insert(self, sequence):
+    def insert(self, sequence: list) -> None:
         """
         inserts a single sequence to the tree
         probabilities are saved in each node, so that smaller orders can be utilized as well
@@ -42,7 +41,7 @@ class Trie:
         else:
             current.probabilities[note] = 1
 
-    def find(self, sequence):
+    def find(self, sequence: list) -> dict:
         """
         takes a sequence as a parameter and returns the probabilites of the last node
         """
