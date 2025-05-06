@@ -34,7 +34,7 @@ class RiffGenerator:
         takes and inserts midi files and folders from the user
         """
         while True:
-            path = input("File or folder name: ")
+            path = input("Give file or folder name or press enter to continue: ")
             if path == "":
                 if self.generator.isempty():
                     print("Cannot generate without any input.")

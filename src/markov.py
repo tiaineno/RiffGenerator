@@ -23,7 +23,7 @@ class Generator:
 
     def insert(self, sequence: tuple[list, list]):
         """
-        Takes an tuple, with as an parameter
+        Takes an tuple as an parameter
         The tuple should consist of two lists with pitches and rhythm
         Raises an error if the amount of measures or notes is less than the order
         """
