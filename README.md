@@ -21,7 +21,8 @@ poetry run python src/index.py
 
 ## Input parameters ##
 ### order
-Order will determine how many previous notes the program considers when generating the next one. Smaller number will lead to more random results. 2 is a good starting point (3 with large amount of input)
+Order will determine how many previous notes the program considers when generating the next one. Smaller number will lead to more random results. 3 is a good starting point (2 with a small amount of input)
+
 ### midi files
 You can use the default input files when testing the program. Just type "minor" or "major" to insert the folders (inserting both at the same time will lead to unnatural generation). You can also use your own midi files by moving them into the input folder.
 Inserting single midi files is possible as well by typing the file name ("test_ukkonooa.mid", "minor/hurt.mid").
